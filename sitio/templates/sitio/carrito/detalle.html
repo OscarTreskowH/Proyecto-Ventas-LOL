@@ -1,0 +1,124 @@
+{% extends "sitio/layout.html" %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+        integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-10 ">
+                <h1>Factura</h1>
+            </div>
+            <div class="col-xs-2">
+                <img class="img img-responsive" src="https://cdn.beahero.gg/2021/05/League-of-Legends-Wild-Rift-portada.jpg" alt="Logotipo">
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-xs-10">
+                <h1 class="h6">Usuario Logeado: {{user.get_username}}</h1>
+                <h1 class="h6">https://parzibyte.me/blog</h1>
+            </div>
+            <div class="col-xs-2 text-center">
+                <strong>Fecha</strong>
+                <br>
+                2021-05-03 <br>
+                <strong>Factura No.</strong>
+                <br>
+                1
+            </div>
+        </div>
+        <hr>
+        <div class="row text-center" style="margin-bottom: 2rem;">
+            <div class="col-xs-6">
+                <h1 class="h2">Cliente</h1>
+                <strong>{{user.get_username}}</strong>
+                
+            </div>
+            <div class="col-xs-6">
+                <h1 class="h2">Remitente</h1>
+                <strong>Champeons League of Legends</strong>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <table class="table table-condensed table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Descripción</th>
+                            <th>Cantidad</th>
+                            <th>Precio unitario</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in items_carrito %}
+                        <tr>
+                            <td>{{item.producto.titulo.title}}</td>
+                            <td>{{item.stock}}</td>
+                            <td>{{ item.producto.precio }}</td>
+                            <td>${{item.subtotal}}</td>
+                        </tr>
+
+                    {% empty %}
+                        <div class="col-12 p-0 m-0">
+                            <p class="d-flex justify-content-between align-items-center">
+                                No tiene ningun producto en el carrito
+                            </p>
+                        </div>
+                    {% endfor %}
+                    </tbody>
+                    <tfoot>
+                    {% for c in carrito %}
+                        <tr>
+                            <td colspan="3" class="text-right">Subtotal</td>
+                            <td>${{c.total}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" class="text-right">Descuento</td>
+                            <td>$ 0</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" class="text-right">Subtotal con descuento</td>
+                            <td>${{c.total}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" class="text-right">Impuestos</td>
+                            <td>$ {{iva}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" class="text-right">
+                                <h4>Total</h4>
+                            </td>
+                            <td>
+                            
+                                <div class="col-12 p-0 m-0">
+                                    <p class="d-flex justify-content-between align-items-center">
+                                        ${{total}}
+                                    </p>
+                                </div>
+                    
+                              
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 text-center">
+                <p class="h5">Gracias por su compra</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+{% endblock %}
