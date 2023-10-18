@@ -4,5 +4,5 @@
 2) Iniciar Proyecto : python manage.py runserver  
 3) Copiar dirección local host  
 
-  > **ProTip:** A disfrutar de una buena compra 🤣👌👌** dialog.
+  > ** A disfrutar de una buena compra 🤣👌👌**
 
